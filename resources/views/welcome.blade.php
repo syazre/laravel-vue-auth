@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -11,4 +11,23 @@
       </div>
       <script src="{{asset('js/app.js')}}"></script>
     </body>
-</html>
+</html> -->
+
+
+@extends('layouts.app')
+@section('content')
+    <nav class="navbar-light bg-light">
+        <div class="container mx-auto flex-start">
+            <router-link to='/' exact>Home</router-link>
+            <router-link to='/about'>About</router-link>
+
+            <router-link to='/login'>Login</router-link>
+            <router-link to='/register'>Register</router-link>
+        </div>
+    </nav>
+    <div>
+        <div class="container mx-auto">
+            <router-view></router-view>
+        </div>
+    </div>
+@endsection

@@ -5,9 +5,16 @@
  */
 
 require('./bootstrap');
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 const Home = require('./pages/Home.vue').default
+const About = require('./pages/About.vue').default
+const Login = require('./pages/Login.vue').default
+const Register = require('./pages/Register.vue').default
+const Dashboard = require('./pages/Dashboard.vue').default
+const NotFound = require('./pages/NotFound.vue').default
 
 Vue.use(VueRouter)
 
@@ -15,14 +22,36 @@ Vue.use(VueRouter)
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 const routes = [
-{
-    path: '/' ,
-    component: Home
-}
+    {
+        path: '*' ,
+        component: NotFound
+    },
+    {
+        path: '/' ,
+        component: Home
+    },
+    {
+        path: '/about' ,
+        component: About
+    },
+    {
+        path: '/register' ,
+        component: Register
+    },
+    {
+        path: '/login' ,
+        component: Login
+    },
+    {
+        path: '/dashboard' ,
+        component: Dashboard,
+        name: 'Dashboard',
+    },
 ]
 
 const router = new VueRouter({
     mode: 'history',
+    linkActiveClass: 'font-weight-bold',
     routes
 })
 
