@@ -28,7 +28,8 @@ const routes = [
     },
     {
         path: '/' ,
-        component: Home
+        component: Home,
+        name: 'Home',
     },
     {
         path: '/about' ,

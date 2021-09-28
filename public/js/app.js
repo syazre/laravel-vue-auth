@@ -2109,17 +2109,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      user: null
+      users: []
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    logout: function logout() {
+      var _this = this;
 
-    axios.get('/api/user').then(function (res) {
-      _this.user = res.data;
+      axios.post('/api/logout').then(function () {
+        _this.$router.push({
+          name: "Home"
+        });
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    axios.get('/api/users').then(function (res) {
+      _this2.users = res.data;
     });
   }
 });
@@ -2169,6 +2184,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/login', this.form).then(function () {
+        /* localStorage.setItem("auth", "true"); */
         _this.$router.push({
           name: "Dashboard"
         });
@@ -2284,7 +2300,8 @@ var routes = [{
   component: NotFound
 }, {
   path: '/',
-  component: Home
+  component: Home,
+  name: 'Home'
 }, {
   path: '/about',
   component: About
@@ -2336,8 +2353,13 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+/* window.axios = require('axios');
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; */
+
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+window.axios.defaults.withCredentials = true;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -38284,16 +38306,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("Dashboard")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm._l(_vm.users, function(user) {
+        return _c("div", { key: user.id }, [
+          _vm._v("\r\n        Name: " + _vm._s(user.name) + "\r\n    ")
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.logout.apply(null, arguments)
+            }
+          }
+        },
+        [_vm._v("Logout")]
+      )
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Dashboard")]), _vm._v(" "), _c("br")])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

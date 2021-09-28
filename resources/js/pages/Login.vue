@@ -30,6 +30,7 @@ export default {
     methods: {
         loginUser() {
             axios.post('/api/login', this.form).then(() =>{
+                /* localStorage.setItem("auth", "true"); */
                 this.$router.push({name: "Dashboard"});
             }).catch((error) => {
                 this.errors = error.response.data.errors;

@@ -28,3 +28,7 @@ Route::any('{/slug}}', function () {
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
+
+/* Route::get('/register', function() {
+
+})=>middleware(); */
