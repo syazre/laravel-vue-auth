@@ -1,11 +1,13 @@
 <template>
 <div>
     <h1>Dashboard</h1>
-    <br>
-    <div v-for="user in users" :key="user.id">
-        Name: {{user.name}}
-    </div>
     <button @click.prevent="logout">Logout</button>
+    <br>
+    <!-- <div v-if="user">
+        Name: {{user.name}} <br>
+        Email: {{user.email}}<br><br>
+        <button @click.prevent="logout">Logout</button>
+    </div> -->
     <!-- Name: {{user.name}} <br>
     Email: {{user.email}} -->
 </div>
@@ -21,15 +23,19 @@ export default {
     },
     methods:{
         logout(){
-            axios.post('/api/logout').then(()=>{
+            axios.post('/api/logout', {
+                headers: {
+                    Authorization:localStorage.getItem('SavedToken')
+                }
+            }).then(()=>{
                 this.$router.push({ name: "Home"})
             })
         }
     },
-    mounted(){
-        axios.get('/api/users').then((res)=>{
-            this.users = res.data
+    /* mounted(){
+        axios.get('/api/user').then((res)=>{
+            this.user = res.data
         })
-    }
+    } */
 }
 </script>

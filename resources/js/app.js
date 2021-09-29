@@ -15,6 +15,7 @@ const Login = require('./pages/Login.vue').default
 const Register = require('./pages/Register.vue').default
 const Dashboard = require('./pages/Dashboard.vue').default
 const NotFound = require('./pages/NotFound.vue').default
+const Profile = require('./pages/Profile.vue').default
 
 Vue.use(VueRouter)
 
@@ -41,13 +42,18 @@ const routes = [
     },
     {
         path: '/login' ,
-        component: Login
+        component: Login,
+        name: 'Login',
+    },
+    {
+        path: '/profile' ,
+        component: Profile
     },
     {
         path: '/dashboard' ,
         component: Dashboard,
         name: 'Dashboard',
-    },
+    }
 ]
 
 const router = new VueRouter({
